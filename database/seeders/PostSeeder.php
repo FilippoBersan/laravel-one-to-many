@@ -22,7 +22,7 @@ class PostSeeder extends Seeder
 
 
 // metodo per svuotare la tabella
-        Post::truncate();
+        // Post::truncate();
         //
         for ($i = 0; $i < 30; $i++){
 
