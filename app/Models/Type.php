@@ -13,7 +13,7 @@ class Type extends Model
 
     public function posts()
     {
-       return $this->HasMany(Post::class);
+       return $this->hasOne(Post::class);
     }
 
    

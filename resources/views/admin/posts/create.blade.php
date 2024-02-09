@@ -37,7 +37,16 @@
     <textarea type="text"  class="form-control" name="content"value="{{old('content')}}" ></textarea> </textarea>
   </div>
 
+ <div class="mb-3">
+  <label for="">Tipo </label>
+  <select class="form-select" aria-label="Default select example" name="type_id">
+  <option selected>Open this select menu</option>
+@foreach ($types as $type)
+  <option value="{{ $type->id }}">{{ $type->title }}</option>
+ @endforeach
 
+</select>
+</div>
    
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

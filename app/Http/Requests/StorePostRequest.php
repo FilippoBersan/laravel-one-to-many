@@ -25,6 +25,7 @@ class StorePostRequest extends FormRequest
             //
             'title' => ['required','unique:posts,title','max:47','string'],
             'content' => ['nullable', 'max:500'],
+            'type_id' => ['nullable', 'exists:types,id']
         ];
     }
 }

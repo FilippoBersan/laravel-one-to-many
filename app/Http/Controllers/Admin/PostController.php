@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\Type;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -30,9 +31,12 @@ class PostController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+    
     {
+
+        $types = Type::all();
         //
-        return view('admin.posts.create');
+        return view('admin.posts.create', compact('types'));
     }
 
     /**
@@ -40,6 +44,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
+        // dd($request->all());
         //
 
         // $data = $request->all();
@@ -51,8 +57,13 @@ class PostController extends Controller
         $data = $request->validated();
 
         $post = new Post();
+
+
+     
         $post->title = $data['title'];
          $post->content = $data['content'];
+         
+    //    
           $post->slug = Str::of($post->title)->slug('-');
 
           $post->save();
