@@ -50,11 +50,19 @@
       <td>{{$post->title}}</td>
       <td>{{$post->slug}}</td>
       <td>
-        <a rel="stylesheet" href="" role="button" class="btn btn-warning btn-sm">edit</a>
+        <a rel="stylesheet" href="{{route('admin.posts.edit', $post )}}" role="button" class="btn btn-warning btn-sm">edit</a>
 
          <a rel="stylesheet" href="{{route('admin.posts.show', $post )}}" role="button" class="btn btn-primary btn-sm">show</a>
 
-          <a rel="stylesheet" href="" role="button" class="btn btn-danger btn-sm">delete</a>
+          <form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+                                     @csrf
+                                     @method('DELETE')
+                                     <button class="btn btn-danger btn-sm">delete</button>
+                                 </form>
+
+
+
+   
       </td>
     </tr>
     @endforeach  

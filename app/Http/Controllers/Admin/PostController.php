@@ -97,6 +97,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+
+
+
+        //
+    
+           return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -105,6 +111,16 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         //
+
+         $data= $request->validated();
+
+       
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->slug = $data['slug'];
+   
+        $post->save();
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -112,6 +128,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+      
+         $post_id = $post->id;
+         $post->delete();
+
+         return redirect()->route('admin.posts.index')->with('message', "Post $post_id cancellato correttamente");
     }
 }
