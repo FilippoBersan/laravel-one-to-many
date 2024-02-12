@@ -48,20 +48,17 @@ class PostController extends Controller
         // dd($request->all());
         //
 
-        // $data = $request->all();
-
-        // $post = new Post();
-
-        // $post->save();
 
         $data = $request->validated();
 
         $post = new Post();
-
-
-     
+        
+        
+        
         $post->title = $data['title'];
          $post->content = $data['content'];
+         
+         
          
     //    
           $post->slug = Str::of($post->title)->slug('-');
@@ -98,7 +95,7 @@ class PostController extends Controller
     {
         //
 
-
+ $types = Type::all();
 
         //
     
@@ -112,15 +109,25 @@ class PostController extends Controller
     {
         //
 
-         $data= $request->validated();
+         $data = $request->validated();
 
-       
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->slug = $data['slug'];
-   
-        $post->save();
-        return redirect()->route('admin.posts.index');
+
+        //  $post->title = $data['title'];
+        //  $post->content = $data['content'];
+        //  $post->slug = $data['slug'];
+
+         $post->save();
+
+
+         $post->slug = Str::of($data['title'])->slug('-');
+
+         // $post->title = $data['title'];
+         // $post->content = $data['content'];
+         // $post->save();
+         $post->update($data);
+
+         return redirect()->route('admin.posts.index')->with('message', "Post $post->id aggiornato correttamente");
+
     }
 
     /**

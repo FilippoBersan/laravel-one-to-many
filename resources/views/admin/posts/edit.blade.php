@@ -11,7 +11,7 @@
 </head>
 <body class="bg-body-secondary">
   <div class="container">
-  <h1>Modifica Portfolio  </h1>
+  <h1>Modifica Portfolio {{$post->title}}  </h1>
 
   @if ($errors->any()) 
 <div class="alert alert-danger">
@@ -23,28 +23,28 @@
 </div>
 @endif
 
-  <form action="{{route('admin.posts.update')}} " method="POST">
+  <form action="{{route('admin.posts.update', $post)}} " method="POST">
     @csrf
     @method('PUT')
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Titolo Portfolio</label>
-    <input type="text" class="form-control" name="title" value="{{old('title')}}" required  >
+    <input type="text" class="form-control" name="title" value="{{old('title', $post->title)}}" required  >
      
 
    </div>
 
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Contenuto</label>
-    <textarea type="text"  class="form-control" name="content"value="{{old('content')}}" ></textarea> </textarea>
+    <textarea type="text"  class="form-control" name="content" id="content" value="{{old('content', $post->content)}}" required ></textarea> </textarea>
   </div>
 
  <div class="mb-3">
   <label for="">Tipo </label>
   <select class="form-select" aria-label="Default select example" name="type_id">
   <option selected>Open this select menu</option>
-@foreach ($types as $type)
+{{-- @foreach ($types as $type)
   <option value="{{ $type->id }}">{{ $type->title }}</option>
- @endforeach
+ @endforeach --}}
 
 </select>
 </div>
